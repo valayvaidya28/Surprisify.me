@@ -1,0 +1,20 @@
+<%= form_tag(excerpts_path) do%>
+		<% @categories.each do |c|%>
+			<%= check_box_tag "category_#{c.id}", "#{c.category_name}"%> <%= c.category_name %><br>
+		<% end %>
+	<p>
+		<%= label_tag :content%> <br />
+		<%= text_field_tag :content %>
+	</p>
+	<p>
+		<%= label_tag :author %> <br />
+		<%= text_field_tag :author_name %>
+	</p>
+	<p>
+		<%= label_tag :book %> <br />
+		<%= text_field_tag :book_name %>
+	</p>
+	<p>
+		<%= button_tag "Publish" %> 
+	</p>	
+<% end %>
