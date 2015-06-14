@@ -1,4 +1,12 @@
 class ExcerptsController < ApplicationController
+
+  def index
+    @categories = Category.all
+  end
+
+  def show
+  end
+
   def new
     @except = Excerpt.new
     @categories = Category.all
@@ -45,12 +53,4 @@ class ExcerptsController < ApplicationController
 
   def destroy
   end
-
-  def index
-    @categories = Category.all
-  end
-
-  def show
-  end
-
 end
