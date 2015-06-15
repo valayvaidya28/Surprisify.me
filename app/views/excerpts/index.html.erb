@@ -1,3 +1,7 @@
+<%= link_to current_user.first_name ? "#{current_user.first_name} #{current_user.last_name}" : current_user.username, edit_user_registration_path %>
+
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+
 <% @categories.each do |c| %>
 	<li><%= link_to c.category_name, excerpt_with_category_path(id: c.id) %></li>
 <% end %>

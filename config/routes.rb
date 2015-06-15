@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'excerpts#index'
+  devise_for :users
   get '/category/:id', to: 'excerpts#category_excerpt', as: 'excerpt_with_category'
   get '/excerpt', to: 'excerpts#select_excerpt', as: 'select_excerpt'
   resources :excerpts
