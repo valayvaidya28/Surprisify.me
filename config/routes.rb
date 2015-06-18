@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/excerpt', to: 'excerpts#select_excerpt', as: 'select_excerpt'
   resources :excerpts
   resources :categories
+  resources :subscribers
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
