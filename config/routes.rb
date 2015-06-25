@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   get '/category/:id', to: 'excerpts#category_excerpt', as: 'excerpt_with_category'
   get '/excerpt', to: 'excerpts#select_excerpt', as: 'select_excerpt'
+  get '/users/dashboard', to: 'users#dashboard', as: 'dashboard'
   resources :excerpts
   resources :categories
   resources :subscribers

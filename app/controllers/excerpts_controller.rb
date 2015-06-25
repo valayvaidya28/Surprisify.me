@@ -23,6 +23,8 @@ class ExcerptsController < ApplicationController
       end
     end
     if @excerpt.save
+      current_user.excerpts << @excerpt
+      current_user.save!
       flash[:success] = "Exceprt has been successfully added to the database."
       redirect_to and return '/excerpts'
     else
