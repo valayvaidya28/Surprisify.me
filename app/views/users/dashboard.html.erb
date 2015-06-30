@@ -1,6 +1,8 @@
+<%= link_to "Home", excerpts_path %><br><br>
 <% @excerpts.each do |e| %>
 	<%= e.content %><br>
 	<%= e.author_name %><br>
 	<%= e.book_name %><br>	
 	----------------------
+	<%= link_to "Edit", edit_excerpt_path(e.id) %> <br>
 <% end %>

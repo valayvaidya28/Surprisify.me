@@ -48,9 +48,25 @@ class ExcerptsController < ApplicationController
   end
 
   def update
+    @excerpt = Excerpt.find(params[:id])
+    logger.info("1111191919191919191919191919191919191919191")
+    logger.info(params[:content])
+    if @excerpt.content!=params[:content] or @excerpt.book_name!=params[:book_name] or @excerpt.author_name!=params[:author_name]
+      @excerpt.content = params[:content]
+      @excerpt.book_name = params[:book_name]
+      @excerpt.author_name = params[:author_name]
+      @excerpt.save!
+      flash[:success] = "Excerpt has been edited."
+      redirect_to '/users/dashboard'
+    else
+      flash[:error] = "Something went wrong. Try again."
+      redirect_to :edit
+    end
   end
 
   def edit
+    @excerpt = Excerpt.find_by_id(params[:id])
+    @categories = Category.all
   end
 
   def destroy

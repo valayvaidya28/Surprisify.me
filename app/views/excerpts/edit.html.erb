@@ -1,2 +1,21 @@
-<h1>Excerpts#edit</h1>
-<p>Find me in app/views/excerpts/edit.html.erb</p>
+<h1>Edit the excerpt</h1>
+<p>
+    <%= link_to "Dashboard", dashboard_path %>
+</p>
+<%= form_tag({controller: "excerpts", action:"update" },{:method => :put}) do%>
+    <p>
+        <%= label_tag "Content:" %>
+        <%= text_field_tag "content", @excerpt.content %><br>
+    </p>
+    <p>
+        <%= label_tag "Author:" %>
+        <%= text_field_tag "author_name", @excerpt.author_name %><br>
+    </p>
+    <p>
+        <%= label_tag "From the Book:" %>
+        <%= text_field_tag "book_name", @excerpt.book_name %><br>
+    </p>
+    <p>
+        <%= submit_tag "Update" %>
+    </p>
+<% end %>
