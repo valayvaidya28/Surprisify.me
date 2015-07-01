@@ -8,13 +8,13 @@ class ExcerptsController < ApplicationController
   end
 
   def new
-    @except = Excerpt.new
+    @excerpt = Excerpt.new
     @categories = Category.all
   end
 
   def create
     all_params = params
-    @excerpt= Excerpt.new(:content => all_params[:content], :author_name=> all_params[:author_name], :book_name => all_params[:book_name])
+    @excerpt= Excerpt.new(:content => all_params[:content], :author_name=> all_params[:author_name], :book_name => all_params[:book_name], :user_id => current_user.id)
     all_params.each do |key, value|
       if key.start_with?("category")
         category = Category.find_by_category_name(value)
@@ -23,6 +23,13 @@ class ExcerptsController < ApplicationController
       end
     end
     if @excerpt.save
+      if current_user.email == "valayvaidya28@gmail.com"
+        @excerpt.reviewed = true
+        @excerpt.save!
+      else
+        @excerpt.reviewed = false
+        @excerpt.save!
+      end
       current_user.excerpts << @excerpt
       current_user.save!
       flash[:success] = "Exceprt has been successfully added to the database."
@@ -38,8 +45,9 @@ class ExcerptsController < ApplicationController
   end
 
   def select_excerpt
-    offset = rand(Excerpt.count)
-    @excerpt = Excerpt.offset(offset).first
+    @excerpts = Excerpt.where('reviewed' => true)
+    offset = rand(@excerpts.count)
+    @excerpt = @excerpts.offset(offset).first
     logger.info(@excerpt.id)
     respond_to do |format|
       format.js
@@ -70,5 +78,13 @@ class ExcerptsController < ApplicationController
   end
 
   def destroy
+  end
+
+  def approve_excerpt
+    @excerpt = Excerpt.find_by_id(params[:id])
+    logger.info("22239234234hfaljdflkajsdflkjasldkfjalskf")
+    @excerpt.reviewed = 'true'
+    @excerpt.save!
+    redirect_to dashboard_path
   end
 end

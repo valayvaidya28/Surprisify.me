@@ -1,8 +1,32 @@
-<%= link_to "Home", excerpts_path %><br><br>
+<%= link_to "Home", excerpts_path %>
+<%= link_to "New Excerpt", new_excerpt_path %>
+<br><br>
+<% if current_user.email == "valayvaidya28@gmail.com" %>
+	<h1> Excerpts to be Approved. </h1>
+	<% @excerpts_to_be_approved.each do |exc| %>
+		<%= exc.content %><br>
+		<%= exc.author_name %><br>
+		<%= exc.book_name %><br>
+		<%= link_to "Approve", approve_excerpt_path(exc.id), method: :post %><br>
+	<% end %>
+	---------------------------------------------------<br>
+	<h1> All excerpts that belong to me </h1>
+	<br>
+	<% @excerpts_that_belong_to_the_user.each do |e| %>
+		<%= e.content %><br>
+		<%= e.author_name %><br>
+		<%= e.book_name %><br>
+		<%= link_to "Edit", edit_excerpt_path(e.id) %> <br>
+		---------------------- <br>
+	<% end %>
+<% end %>
+------------------------------------------------------
+<h1> All excerpts </h1>
+<br>
 <% @excerpts.each do |e| %>
 	<%= e.content %><br>
 	<%= e.author_name %><br>
-	<%= e.book_name %><br>	
-	----------------------
+	<%= e.book_name %><br>
 	<%= link_to "Edit", edit_excerpt_path(e.id) %> <br>
+		---------------------- <br>
 <% end %>

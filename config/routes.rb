@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/category/:id', to: 'excerpts#category_excerpt', as: 'excerpt_with_category'
   get '/excerpt', to: 'excerpts#select_excerpt', as: 'select_excerpt'
   get '/users/dashboard', to: 'users#dashboard', as: 'dashboard'
+  post '/excerpt/approve/:id', to: 'excerpts#approve_excerpt', as: 'approve_excerpt'
   resources :excerpts
   resources :categories
   resources :subscribers
